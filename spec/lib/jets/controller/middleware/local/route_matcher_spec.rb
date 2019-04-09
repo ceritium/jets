@@ -207,6 +207,22 @@ describe Jets::Controller::Middleware::Local::RouteMatcher do
     end
   end
 
+  context "get others/ - proxy path route" do
+    let(:env) do
+      { "PATH_INFO" => "others/", "REQUEST_METHOD" => "GET" }
+    end
+    it "route_found?" do
+      route = Jets::Route.new(
+        path: "others",
+        method: :get,
+        to: "others#all",
+      )
+      found = matcher.route_found?(route)
+      expect(found).to be true
+    end
+  end
+
+
   context "get others/my/long/path - proxy path route" do
     let(:env) do
       { "PATH_INFO" => "others/my/long/path", "REQUEST_METHOD" => "GET" }

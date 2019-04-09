@@ -21,6 +21,7 @@ class Jets::Controller::Middleware::Local
     def route_found?(route)
       request_method = @env["REQUEST_METHOD"] || "GET"
       actual_path = @env["PATH_INFO"].sub(/^\//,'') # remove beginning slash
+      actual_path = actual_path[0..-2] if actual_path.last == '/'
 
       # Immediately stop checking when the request method: GET, POST, ANY, etc
       # doesnt match.
