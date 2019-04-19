@@ -26,8 +26,9 @@ module AwsLambda
           # method_response.to_json # application/json is assumed
           JSON.dump(method_response)
         end
+      rescue
+        method_response
       end
-
     end
   end
 end
